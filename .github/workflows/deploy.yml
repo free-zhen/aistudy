@@ -1,0 +1,25 @@
+name: Deploy to server
+
+# 每次 push 到 main 分支时自动触发
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {} # 也允许在 Actions 页面手动点击运行
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH 到服务器并更新代码
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }} # 服务器公网 IP 或域名
+          username: ${{ secrets.SERVER_USER }} # 登录用户名，如 root
+          key: ${{ secrets.SERVER_SSH_KEY }} # 部署私钥（见配置说明）
+          port: ${{ secrets.SERVER_PORT || 22 }} # SSH 端口，默认 22
+          script: |
+            set -e
+            cd /var/www/ai-course        # 服务器上仓库所在目录（按实际改）
+            git fetch --all
+            git reset --hard origin/main # 强制与远端一致，避免冲突
+            echo "✅ 部署完成：$(git rev-parse --short HEAD)"

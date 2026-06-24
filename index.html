@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 全栈学习教程</title>
+  <meta name="description" content="写给前端工程师的 AI 全栈（LLM 应用开发）学习教程" />
+  <!-- Docsify 默认主题 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
+  <style>
+    /* 让正文里的表格和代码块更舒服 */
+    .markdown-section { max-width: 920px; }
+    .markdown-section pre { font-size: 14px; }
+    .mermaid { text-align: center; }
+  </style>
+</head>
+<body>
+  <div id="app">加载中…（首次需联网拉取渲染库）</div>
+
+  <script>
+    window.$docsify = {
+      name: 'AI 全栈学习教程',
+      repo: '',
+      loadSidebar: true,        // 启用 _sidebar.md 作为左侧目录
+      subMaxLevel: 2,           // 正文标题自动生成右侧锚点（到 2 级）
+      auto2top: true,           // 切换章节自动回到顶部
+      relativePath: true,       // 关键：让章节间的 ../xx/README.md 相对链接正常跳转
+      search: {
+        placeholder: '搜索章节内容…',
+        noData: '没有找到结果',
+        depth: 3
+      },
+      // 把 ```mermaid 代码块渲染成图，而不是当成普通代码
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            if (lang === 'mermaid') {
+              return '<div class="mermaid">' + code + '</div>';
+            }
+            return this.origin.code.apply(this, arguments);
+          }
+        }
+      },
+      plugins: [
+        function (hook) {
+          // 每次页面渲染完成后，绘制其中的 Mermaid 图
+          hook.doneEach(function () {
+            if (window.mermaid) {
+              try { window.mermaid.run({ querySelector: '.mermaid' }); } catch (e) {}
+            }
+          });
+        }
+      ]
+    };
+  </script>
+
+  <!-- Docsify 核心 + 插件 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code@2"></script>
+  <!-- Mermaid 画图 -->
+  <script src="//cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>mermaid.initialize({ startOnLoad: false, theme: 'default' });</script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "id": "TASK-010",
+  "title": "第09章 向量数据库",
+  "description": "编写 chapters/09-vector-database/README.md。用 Chroma 入门，讲向量的存储与检索，承接第08章 embedding。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/09-vector-database/README.md：为什么需要向量数据库（海量向量的高效相似检索）；Chroma 入门（pip install chromadb；创建 collection；add 文档+向量+metadata；query 按相似度 top-k 检索）；持久化到本地目录。六段式骨架 + 与 SQLite 对比。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/09-vector-database/",
+  "focus_paths": ["chapters/09-vector-database/README.md"],
+
+  "read_first": [
+    "chapters/09-vector-database/README.md",
+    "README.md",
+    "chapters/08-embeddings/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 3,
+  "parallel_group": "wave3",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/09-vector-database/README.md contains '## 本章目标'",
+      "chapters/09-vector-database/README.md contains '## 下一章预告'",
+      "chapters/09-vector-database/README.md contains 'Chroma'",
+      "chapters/09-vector-database/README.md contains 'collection'",
+      "chapters/09-vector-database/README.md contains '检索'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|Chroma|collection|检索' chapters/09-vector-database/README.md",
+    "definition_of_done": "学习者能用 Chroma 创建 collection、写入带向量的文档并按相似度检索 top-k，理解向量库与普通数据库的区别。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/09-vector-database/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "Chroma 向量库入门：存储与检索"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：用向量数据库高效存储与检索文本向量",
+    "核心概念：为什么不用 SQLite 存向量（相似检索效率）；向量库职责；collection / documents / embeddings / metadatas / ids；top-k 检索",
+    "动手实践：pip install chromadb；PersistentClient 持久化；create/get collection；collection.add(ids, documents, embeddings, metadatas)；collection.query(query_embeddings, n_results) 返回相似文档",
+    "常见报错：向量维度不一致、id 重复、未持久化重启丢数据、embedding 由谁生成（自带 vs 自传）",
+    "小结 + 下一章预告：第10章 RAG 原理与最小实现",
+    "对比：向量库 vs 第07章 SQLite，各自适用场景"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/09-vector-database/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含 Chroma 增删查完整示例", "讲清 top-k 检索"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/08-embeddings/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "Chroma 轻量易上手，适合本地学习与毕业项目",
+    "decision_factors": ["RAG 存储层", "本地零配置"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["向量数据库", "Chroma"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "30m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

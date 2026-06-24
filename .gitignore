@@ -1,0 +1,23 @@
+# 真实密钥 —— 绝不提交
+.env
+*.env
+!config/.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# 向量数据库 / 数据文件（后面章节会产生）
+chroma_db/
+storage/
+*.sqlite3
+*.db
+data/uploads/
+
+# 编辑器 / 系统
+.vscode/
+.idea/
+.DS_Store

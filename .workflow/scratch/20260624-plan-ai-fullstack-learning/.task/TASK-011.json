@@ -1,0 +1,95 @@
+{
+  "id": "TASK-011",
+  "title": "第10章 RAG 原理与最小实现",
+  "description": "编写 chapters/10-rag-fundamentals/README.md。串起前面所有知识：文档切分->向量化入库->检索->拼 prompt->生成，做出最小可运行的 RAG。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/10-rag-fundamentals/README.md：讲 RAG 为什么能让模型『读你的文档』（检索增强生成）；完整最小流程脚本：读一段长文本 -> 按长度/段落切分 chunks -> 每块 embedding 入 Chroma -> 用户提问 embedding 检索 top-k -> 把检索结果拼进 prompt -> 调 DeepSeek 生成带依据的回答。六段式骨架，串联第06/08/09章。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/10-rag-fundamentals/",
+  "focus_paths": ["chapters/10-rag-fundamentals/README.md"],
+
+  "read_first": [
+    "chapters/10-rag-fundamentals/README.md",
+    "README.md",
+    "chapters/09-vector-database/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 3,
+  "parallel_group": "wave3",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/10-rag-fundamentals/README.md contains '## 本章目标'",
+      "chapters/10-rag-fundamentals/README.md contains '## 下一章预告'",
+      "chapters/10-rag-fundamentals/README.md contains 'RAG'",
+      "chapters/10-rag-fundamentals/README.md contains '切分'",
+      "chapters/10-rag-fundamentals/README.md contains '检索'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|RAG|切分|检索' chapters/10-rag-fundamentals/README.md",
+    "definition_of_done": "学习者能跑通一个最小 RAG：把一段文档切分入库，提问后检索相关片段并让模型基于片段作答。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/10-rag-fundamentals/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "RAG 原理 + 最小可运行实现（切分/检索/拼接/生成）"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：理解 RAG 全流程并跑通最小实现",
+    "核心概念：为什么需要 RAG（模型不知道你的私有/最新数据）；流程图：切分->向量化->入库->检索->拼 prompt->生成；chunk 大小与重叠的权衡",
+    "动手实践：单文件脚本串起：文本切分函数 -> 逐块 embedding 写入 Chroma -> 用户问题向量检索 top-k -> 构造 prompt（system: 仅依据以下资料回答 + 检索片段）-> 调 DeepSeek 生成",
+    "常见报错：chunk 过大/过小影响效果、检索数量 k 不当、prompt 未约束『仅依据资料』导致幻觉、向量化与检索用了不同 embedding",
+    "小结 + 下一章预告：第11章 毕业项目① RAG 后端",
+    "复用第08章 embedding、第09章 Chroma、第06章结构化/约束提示"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/10-rag-fundamentals/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含端到端可运行 RAG 脚本", "流程串联清晰"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/09-vector-database/README.md", "chapters/08-embeddings/README.md", "chapters/06-prompt-engineering/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "用最小实现打通认知，再在毕业项目工程化",
+    "decision_factors": ["知识收口", "为毕业项目做蓝本"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["RAG"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "35m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

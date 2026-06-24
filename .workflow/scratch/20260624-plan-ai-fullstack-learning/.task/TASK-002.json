@@ -1,0 +1,95 @@
+{
+  "id": "TASK-002",
+  "title": "第01章 Python 速成（写给 JS 工程师）（补充/校对）",
+  "description": "校对并补全 chapters/01-python-for-js-devs/README.md。本章 README 内容由主流程直接编写，本 task 用于补充缺失要点、统一风格、校验可运行性，不重复创建文件。以 JS 对比讲 Python 语法、虚拟环境 venv、pip 依赖管理。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "校对 chapters/01-python-for-js-devs/README.md：确认含 JS↔Python 语法对照表（变量/函数/列表vs数组/字典vs对象/f-string vs 模板字符串/缩进作用域/None vs null/列表推导式）、venv 创建与激活、pip install 与 requirements.txt（对比 npm/package.json）、运行 .py 文件。补全六段式骨架缺失部分。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/01-python-for-js-devs/",
+  "focus_paths": ["chapters/01-python-for-js-devs/README.md"],
+
+  "read_first": [
+    "chapters/01-python-for-js-devs/README.md",
+    "README.md",
+    "chapters/00-env-and-apikey/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 1,
+  "parallel_group": "wave1",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/01-python-for-js-devs/README.md contains '## 本章目标'",
+      "chapters/01-python-for-js-devs/README.md contains '## 下一章预告'",
+      "chapters/01-python-for-js-devs/README.md contains 'venv'",
+      "chapters/01-python-for-js-devs/README.md contains 'pip'",
+      "chapters/01-python-for-js-devs/README.md contains 'JavaScript'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|venv|pip|JavaScript' chapters/01-python-for-js-devs/README.md",
+    "definition_of_done": "JS 工程师读完能看懂并写出基础 Python 脚本，会用 venv 隔离环境、pip 装包。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/01-python-for-js-devs/README.md",
+      "action": "modify",
+      "target": "全文",
+      "change": "补全 JS↔Python 对照、venv/pip 实践、六段式骨架"
+    }
+  ],
+
+  "implementation": [
+    "核对六段式骨架是否齐全",
+    "核心概念：JS↔Python 语法对照表（缩进作用域 vs 花括号、def vs function、dict vs object、list vs array、None vs null/undefined、f-string、import）",
+    "动手实践：python -m venv .venv 创建虚拟环境，激活（Windows/Mac 命令各列一份），pip install + requirements.txt（对比 npm install/package.json），运行 hello.py",
+    "常见报错：python 命令找不到/python vs python3、未激活 venv 装到全局、缩进错误 IndentationError、pip 源慢可换镜像",
+    "下一章预告：第02章 第一次调用 LLM API",
+    "校验代码块可运行，跨平台命令标注清楚"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/01-python-for-js-devs/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含 venv/pip 实践", "JS 对比充分"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/00-env-and-apikey/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "只讲够用 Python，借 JS 已有心智模型快速迁移",
+    "decision_factors": ["零后端但精通 JS", "只学够用部分"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["Python 基础"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "25m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

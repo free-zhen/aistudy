@@ -1,0 +1,95 @@
+{
+  "id": "TASK-005",
+  "title": "第04章 把 LLM 包成自己的后端 API",
+  "description": "编写 chapters/04-llm-backend-api/README.md。把第02章的 DeepSeek 调用封装进 FastAPI，提供 /chat 接口，并实现 SSE 流式响应，为前端接入做准备。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/04-llm-backend-api/README.md：用 FastAPI 写 POST /chat 接收 {messages}，服务端调用 DeepSeek（client.chat.completions.create）返回回复；再实现 SSE 流式接口（StreamingResponse，media_type='text/event-stream'，逐 chunk yield 'data: ...\\n\\n'）；密钥从 .env 读取不暴露给前端。六段式骨架 + JS 对比。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/04-llm-backend-api/",
+  "focus_paths": ["chapters/04-llm-backend-api/README.md"],
+
+  "read_first": [
+    "chapters/04-llm-backend-api/README.md",
+    "README.md",
+    "chapters/03-backend-http-fastapi/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 2,
+  "parallel_group": "wave2",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/04-llm-backend-api/README.md contains '## 本章目标'",
+      "chapters/04-llm-backend-api/README.md contains '## 下一章预告'",
+      "chapters/04-llm-backend-api/README.md contains '/chat'",
+      "chapters/04-llm-backend-api/README.md contains 'StreamingResponse'",
+      "chapters/04-llm-backend-api/README.md contains 'deepseek'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|/chat|StreamingResponse|deepseek' chapters/04-llm-backend-api/README.md",
+    "definition_of_done": "学习者能用 FastAPI 暴露 /chat 接口代理 DeepSeek，并实现 SSE 流式响应，密钥不泄露到前端。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/04-llm-backend-api/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "FastAPI 封装 DeepSeek + SSE 流式接口教学"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：把 LLM 调用搬到后端，对外提供 /chat 接口（含流式）",
+    "核心概念：为何不在前端直接调大模型（密钥安全/计费/可控）；SSE 是什么、与 WebSocket 区别；text/event-stream 格式",
+    "动手实践：POST /chat 普通版返回完整回复；POST /chat/stream 用 StreamingResponse 逐 chunk yield 'data: <token>\\n\\n'；复用第02章 client；密钥 load_dotenv 读取",
+    "常见报错：流式没设 media_type、SSE 数据格式缺换行、阻塞式写法导致不流式、密钥误写进代码",
+    "小结 + 下一章预告：第05章 前端接入后端",
+    "JS 对比：前端 EventSource 如何消费 SSE（埋伏笔到第05章）"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/04-llm-backend-api/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含 /chat 与 SSE 流式完整代码", "强调密钥安全"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/03-backend-http-fastapi/README.md", "chapters/02-first-llm-call/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "后端代理模式是 LLM 应用标准架构，先建立此模式",
+    "decision_factors": ["密钥安全", "流式体验", "为前端接入铺路"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["LLM 后端 API", "SSE 流式"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "30m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

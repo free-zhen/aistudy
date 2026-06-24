@@ -1,0 +1,95 @@
+{
+  "id": "TASK-004",
+  "title": "第03章 后端基础① HTTP 与 FastAPI 入门",
+  "description": "编写 chapters/03-backend-http-fastapi/README.md。面向零后端的前端工程师，对比前端 fetch 讲清 HTTP 请求/响应模型，再用 FastAPI 写出第一个后端路由。本章是后端基础第一站。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/03-backend-http-fastapi/README.md：用前端 fetch/Network 面板心智讲 HTTP（方法 GET/POST、URL、Header、Body、状态码、JSON）；安装 fastapi uvicorn；写最小 app（@app.get('/')、@app.post('/echo') 收 JSON 返 JSON）；uvicorn main:app --reload 启动；浏览器/自动生成 /docs 测试。统一六段式骨架与 JS 对比。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/03-backend-http-fastapi/",
+  "focus_paths": ["chapters/03-backend-http-fastapi/README.md"],
+
+  "read_first": [
+    "chapters/03-backend-http-fastapi/README.md",
+    "README.md",
+    "chapters/02-first-llm-call/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 2,
+  "parallel_group": "wave2",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/03-backend-http-fastapi/README.md contains '## 本章目标'",
+      "chapters/03-backend-http-fastapi/README.md contains '## 下一章预告'",
+      "chapters/03-backend-http-fastapi/README.md contains 'FastAPI'",
+      "chapters/03-backend-http-fastapi/README.md contains 'uvicorn'",
+      "chapters/03-backend-http-fastapi/README.md contains 'fetch'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|FastAPI|uvicorn|fetch' chapters/03-backend-http-fastapi/README.md",
+    "definition_of_done": "学习者理解 HTTP 请求/响应模型，能用 FastAPI 启动一个服务并在 /docs 测试自己的接口。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/03-backend-http-fastapi/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "HTTP 概念 + FastAPI 入门教学，六段式骨架"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：看懂 HTTP，能跑通第一个 FastAPI 服务",
+    "核心概念：HTTP 方法/URL/Header/Body/状态码/JSON，用前端 fetch 与浏览器 Network 面板做锚点；什么是『服务端』；端口与 localhost",
+    "动手实践：pip install fastapi uvicorn；main.py 写 @app.get('/') 和 @app.post('/echo')（用 pydantic 或 dict 收 body）；uvicorn main:app --reload 启动；打开 http://127.0.0.1:8000/docs 交互测试",
+    "常见报错：端口被占用、模块路径写错(main:app)、未装 uvicorn、async/同步函数混淆、422 校验错误",
+    "小结 + 下一章预告：第04章 把 LLM 包成自己的后端 API",
+    "全程 JS 对比（Express/Koa 类比可选提及，但以 fetch 为主锚点）"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/03-backend-http-fastapi/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含可启动的 FastAPI 示例", "HTTP 概念以 fetch 对比讲清"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/02-first-llm-call/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "先打通 HTTP 心智再写后端，借前端 fetch 经验降低门槛",
+    "decision_factors": ["零后端基础", "FastAPI 自带 /docs 利于自测"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["后端基础", "FastAPI"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "30m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "id": "TASK-012",
+  "title": "第11章 毕业项目① RAG 后端",
+  "description": "编写 chapters/11-capstone-backend/README.md。把第10章最小 RAG 工程化为完整 FastAPI 后端：上传->解析->切分->向量化->入库->检索->问答。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "large",
+  "action": "创建/编写 chapters/11-capstone-backend/README.md：完整 FastAPI 后端项目结构；POST /upload 接收文件(txt/md/pdf 起步)->解析文本->切分->embedding->写入 Chroma(带 metadata: 文件名/来源)；POST /ask 接收问题->检索 top-k->拼 prompt->调 DeepSeek->流式返回答案+引用来源。复用前面 SSE/Chroma/RAG 知识，六段式骨架。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/11-capstone-backend/",
+  "focus_paths": ["chapters/11-capstone-backend/README.md"],
+
+  "read_first": [
+    "chapters/11-capstone-backend/README.md",
+    "README.md",
+    "chapters/10-rag-fundamentals/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 4,
+  "parallel_group": "wave4",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/11-capstone-backend/README.md contains '## 本章目标'",
+      "chapters/11-capstone-backend/README.md contains '## 下一章预告'",
+      "chapters/11-capstone-backend/README.md contains '/upload'",
+      "chapters/11-capstone-backend/README.md contains '/ask'",
+      "chapters/11-capstone-backend/README.md contains 'Chroma'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|/upload|/ask|Chroma' chapters/11-capstone-backend/README.md",
+    "definition_of_done": "学习者能搭出完整 RAG 后端：上传文档入库，提问时检索并基于文档流式作答，返回引用来源。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/11-capstone-backend/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "完整 RAG 后端工程：上传/解析/切分/向量化/入库/检索/问答"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：把最小 RAG 升级为完整可用的后端服务",
+    "核心概念：项目结构组织（main/rag/db 模块）；文件上传处理；metadata 记录来源用于引用；检索结果如何回传引用",
+    "动手实践：POST /upload（UploadFile）-> 读取/解析(txt/md，pdf 可用 pypdf)-> 切分 -> embedding -> Chroma.add 带 metadata；POST /ask -> 检索 top-k -> 拼 prompt(约束仅依据资料)-> DeepSeek 流式 -> 同时返回命中片段的来源",
+    "常见报错：大文件上传超时/内存、PDF 解析乱码、检索为空时降级处理、流式中混入引用结构、collection 跨重启复用",
+    "小结 + 下一章预告：第12章 毕业项目② RAG 前端",
+    "复用第04章 SSE、第09章 Chroma、第10章 RAG 流程"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/11-capstone-backend/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含 /upload 与 /ask 完整代码", "覆盖引用来源回传"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/10-rag-fundamentals/README.md", "chapters/04-llm-backend-api/README.md", "chapters/09-vector-database/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "工程化是毕业项目核心，结构化拆模块便于学习者维护",
+    "decision_factors": ["毕业项目落地", "复用全部前置知识"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["RAG 后端", "毕业项目"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "45m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

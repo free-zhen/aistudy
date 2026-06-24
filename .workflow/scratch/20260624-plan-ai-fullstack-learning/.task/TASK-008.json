@@ -1,0 +1,95 @@
+{
+  "id": "TASK-008",
+  "title": "第07章 多轮对话与记忆 + 后端基础② 数据持久化",
+  "description": "编写 chapters/07-memory-and-persistence/README.md。讲多轮对话的会话状态管理，并引入后端基础第二站：用 SQLite 持久化会话历史。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/07-memory-and-persistence/README.md：多轮对话本质是把历史 messages 一起传给模型；引入会话 id 管理；SQLite 入门（sqlite3 标准库：建表 messages(session_id, role, content, created_at)、增查）；把会话历史存库并在 /chat 时读取拼接。六段式骨架 + JS 对比（localStorage/IndexedDB 类比）。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/07-memory-and-persistence/",
+  "focus_paths": ["chapters/07-memory-and-persistence/README.md"],
+
+  "read_first": [
+    "chapters/07-memory-and-persistence/README.md",
+    "README.md",
+    "chapters/06-prompt-engineering/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 3,
+  "parallel_group": "wave3",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/07-memory-and-persistence/README.md contains '## 本章目标'",
+      "chapters/07-memory-and-persistence/README.md contains '## 下一章预告'",
+      "chapters/07-memory-and-persistence/README.md contains 'SQLite'",
+      "chapters/07-memory-and-persistence/README.md contains 'session'",
+      "chapters/07-memory-and-persistence/README.md contains 'messages'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|SQLite|session|messages' chapters/07-memory-and-persistence/README.md",
+    "definition_of_done": "学习者理解多轮记忆即历史拼接，并能用 SQLite 持久化会话历史、按 session 读取重建上下文。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/07-memory-and-persistence/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "多轮记忆 + SQLite 持久化教学"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：让对话有记忆，并把历史存进数据库",
+    "核心概念：模型无状态、记忆=把历史 messages 一起发送；token 上限与历史裁剪策略；什么是数据库/表/行；SQLite 是文件型数据库",
+    "动手实践：sqlite3 建表 messages(session_id, role, content, created_at)；封装 save_message / get_history(session_id)；改造 /chat：按 session_id 读历史 -> 追加新消息 -> 调模型 -> 存回",
+    "常见报错：sqlite 连接未提交 commit、SQL 注入（用参数化占位符 ?）、历史过长超 token、session_id 缺失",
+    "小结 + 下一章预告：第08章 Embedding 与文本向量",
+    "JS 对比：SQLite 类比 localStorage/IndexedDB，SQL 表类比对象数组"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/07-memory-and-persistence/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含 SQLite 建表与读写代码", "讲清记忆原理"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/06-prompt-engineering/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "在需要持久化时自然引入数据库，避免空讲后端概念",
+    "decision_factors": ["按需穿插后端基础", "为毕业项目存储铺垫"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["多轮记忆", "SQLite 持久化"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "35m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "id": "TASK-009",
+  "title": "第08章 Embedding 与文本向量",
+  "description": "编写 chapters/08-embeddings/README.md。讲文本向量化原理、相似度计算，这是 RAG 检索的数学基础。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/08-embeddings/README.md：什么是 embedding（文本->高维向量）、语义相似=向量距离近；调用 embedding 接口把文本转向量；用余弦相似度比较两段文本相似度（手写或 numpy）；直观演示『苹果手机 vs 水果苹果』的向量差异。六段式骨架，尽量少数学多直觉。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/08-embeddings/",
+  "focus_paths": ["chapters/08-embeddings/README.md"],
+
+  "read_first": [
+    "chapters/08-embeddings/README.md",
+    "README.md",
+    "chapters/07-memory-and-persistence/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 3,
+  "parallel_group": "wave3",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/08-embeddings/README.md contains '## 本章目标'",
+      "chapters/08-embeddings/README.md contains '## 下一章预告'",
+      "chapters/08-embeddings/README.md contains 'embedding'",
+      "chapters/08-embeddings/README.md contains '相似度'",
+      "chapters/08-embeddings/README.md contains '向量'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|embedding|相似度|向量' chapters/08-embeddings/README.md",
+    "definition_of_done": "学习者理解 embedding 把文本变向量、语义相近向量距离近，并能算两段文本的余弦相似度。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/08-embeddings/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "Embedding 原理 + 相似度计算教学"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：理解文本向量化与相似度，建立 RAG 检索直觉",
+    "核心概念：embedding 是什么（语义坐标）、维度、语义相似=距离近；余弦相似度直觉；与关键词匹配的区别",
+    "动手实践：调 embedding 接口（DeepSeek/兼容接口或备选）把几段文本转向量；用余弦相似度函数比较；演示语义相近 vs 字面相近的差异",
+    "常见报错：不同文本批量请求维度处理、向量是 list 需转 numpy、相似度公式分母为零、接口返回结构取值错误",
+    "小结 + 下一章预告：第09章 向量数据库",
+    "JS 对比：向量类比为多维坐标点，相似度类比距离计算；少公式多比喻"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/08-embeddings/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含向量化与相似度可运行示例", "直觉讲解到位"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/07-memory-and-persistence/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "先讲清向量与相似度，再进向量库与 RAG 才不悬空",
+    "decision_factors": ["RAG 数学基础", "零基础需直觉优先"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["Embedding", "相似度"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "30m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

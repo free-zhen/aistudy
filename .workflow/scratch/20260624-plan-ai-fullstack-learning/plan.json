@@ -1,0 +1,72 @@
+{
+  "summary": "为零后端基础的前端工程师生成一套 14 章 + 附录的『AI 全栈学习』中文教学文档计划。主线：用 Python 调用 DeepSeek API（兼容 OpenAI 接口）做 LLM 应用开发，后端基础（HTTP/FastAPI/SQLite/部署）穿插讲解，最终落地 RAG 知识库问答系统作为毕业项目。每章一个 README.md，统一教学风格，多用 JS 对比讲解 Python/后端概念。",
+  "approach": "每章 = 一个 docs 类型 TASK（TASK-001..TASK-015），执行 Agent 据 action/implementation 直接产出高质量中文教学内容。第00-02章 README 由主流程编写，对应 task 仅做补充/校对；第03章起由执行阶段生成。统一章节骨架：本章目标 / 核心概念 / 动手实践（可运行代码）/ 常见报错 / 小结 / 下一章预告。按内容递进分 4 波并行：wave1 基础起步(00-02)、wave2 前后端打通(03-05)、wave3 RAG 核心知识(06-10)、wave4 毕业项目与上线(11-13+附录)。文件层面各写各的 README，无写冲突，故波内任务全并行，depends_on 仅在确有必要时设置（本计划保持全并行，无硬依赖）。",
+  "task_ids": [
+    "TASK-001", "TASK-002", "TASK-003", "TASK-004", "TASK-005",
+    "TASK-006", "TASK-007", "TASK-008", "TASK-009", "TASK-010",
+    "TASK-011", "TASK-012", "TASK-013", "TASK-014", "TASK-015"
+  ],
+  "task_count": 15,
+  "complexity": "high",
+  "estimated_time": "8h",
+  "recommended_execution": "Agent",
+
+  "waves": [
+    { "wave": 1, "tasks": ["TASK-001", "TASK-002", "TASK-003"] },
+    { "wave": 2, "tasks": ["TASK-004", "TASK-005", "TASK-006"] },
+    { "wave": 3, "tasks": ["TASK-007", "TASK-008", "TASK-009", "TASK-010", "TASK-011"] },
+    { "wave": 4, "tasks": ["TASK-012", "TASK-013", "TASK-014", "TASK-015"] }
+  ],
+
+  "data_flow": {
+    "diagram": null,
+    "stages": [
+      "环境与 API Key (00) -> Python 速成 (01) -> 首次调用 LLM (02)",
+      "HTTP/FastAPI (03) -> LLM 后端 API (04) -> 前端接入 (05)",
+      "Prompt 工程 (06) -> 多轮记忆+持久化 (07) -> Embedding (08) -> 向量库 (09) -> RAG 最小实现 (10)",
+      "毕业项目后端 (11) -> 毕业项目前端 (12) -> 部署上线 (13) -> 附录排错手册 (14)"
+    ]
+  },
+
+  "design_decisions": [
+    "统一使用 DeepSeek API（国内直连、兼容 OpenAI SDK），密钥集中放 .env，全程复用第00章配置",
+    "后端语言选 Python，只讲够用部分；后端基础（HTTP/FastAPI/SQLite/Docker/部署）分三处穿插，不单独成块",
+    "面向零后端前端工程师：每个 Python/后端概念都用等价 JS 概念做对比锚点",
+    "每章统一六段式骨架（本章目标/核心概念/动手实践/常见报错/小结/下一章预告），保证风格与连贯性",
+    "毕业项目 RAG 系统贯穿 08-12 章逐步搭建：向量化->向量库->检索拼接->后端->前端",
+    "第00-02章 README 由主流程编写，对应 task 定位为补充/校对，不重复创建文件"
+  ],
+
+  "shared_context": {
+    "patterns": [
+      "六段式章节骨架：## 本章目标 / ## 核心概念 / ## 动手实践 / ## 常见报错 / ## 小结 / ## 下一章预告",
+      "JS 对比讲解：每个后端/Python 概念配一段 JS 等价写法对照",
+      "可运行代码：动手实践给出完整可复制运行的代码块与预期输出"
+    ],
+    "conventions": [
+      "中文正文，技术术语保留英文并首次出现给中文解释",
+      "中英文/数字间加空格，代码与命令用反引号或代码块",
+      "DeepSeek base_url=https://api.deepseek.com，模型 deepseek-chat，密钥从 .env 读取",
+      "Python 示例使用 venv 虚拟环境与 pip 安装依赖"
+    ],
+    "dependencies": [
+      "DeepSeek API (OpenAI 兼容)",
+      "Python 3 / venv / pip",
+      "openai (python-sdk)",
+      "fastapi / uvicorn",
+      "python-dotenv",
+      "sqlite3 (标准库)",
+      "chromadb",
+      "JavaScript (fetch / EventSource 前端)"
+    ]
+  },
+
+  "_metadata": {
+    "timestamp": "2026-06-24T00:00:00Z",
+    "source": "workflow-planner",
+    "planning_mode": "full",
+    "plan_type": "feature",
+    "schema_version": "2.0",
+    "git_commit": null
+  }
+}

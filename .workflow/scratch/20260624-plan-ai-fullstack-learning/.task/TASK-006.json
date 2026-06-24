@@ -1,0 +1,95 @@
+{
+  "id": "TASK-006",
+  "title": "第05章 前端接入后端",
+  "description": "编写 chapters/05-frontend-integration/README.md。用学习者熟悉的 JS 写一个聊天界面调用第04章的后端，处理 CORS，并实现流式渲染（EventSource / fetch ReadableStream）。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/05-frontend-integration/README.md：纯 HTML+JS 聊天页（输入框/消息列表/发送）；用 fetch 调 POST /chat；用 fetch + ReadableStream（或 EventSource）消费 SSE 实现逐字流式渲染；后端用 FastAPI CORSMiddleware 解决跨域。六段式骨架，发挥学习者前端强项。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/05-frontend-integration/",
+  "focus_paths": ["chapters/05-frontend-integration/README.md"],
+
+  "read_first": [
+    "chapters/05-frontend-integration/README.md",
+    "README.md",
+    "chapters/04-llm-backend-api/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 2,
+  "parallel_group": "wave2",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/05-frontend-integration/README.md contains '## 本章目标'",
+      "chapters/05-frontend-integration/README.md contains '## 下一章预告'",
+      "chapters/05-frontend-integration/README.md contains 'CORS'",
+      "chapters/05-frontend-integration/README.md contains 'fetch'",
+      "chapters/05-frontend-integration/README.md contains '流式'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|CORS|fetch|流式' chapters/05-frontend-integration/README.md",
+    "definition_of_done": "学习者能在浏览器里用一个 JS 聊天页调通后端 /chat，看到 AI 回复流式逐字出现，并解决跨域问题。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/05-frontend-integration/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "前端聊天界面 + CORS + 流式渲染教学"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：前后端打通，做出能用的聊天界面",
+    "核心概念：跨域 CORS 为何出现、预检请求；前端消费 SSE 的两种方式（EventSource vs fetch+ReadableStream）",
+    "动手实践：写 index.html（消息列表 + 输入框）；JS 用 fetch POST 调 /chat/stream，读 response.body.getReader() 逐块解码追加到界面；后端加 app.add_middleware(CORSMiddleware, allow_origins=[...])",
+    "常见报错：CORS 报错、SSE 解析时未按 data: 分割、流式更新 DOM 时漏拼接、混用 http/https/端口",
+    "小结 + 下一章预告：第06章 提示工程 Prompt Engineering",
+    "充分利用学习者前端强项，代码以原生 JS 为主（可提及框架但不依赖）"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/05-frontend-integration/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含完整前端聊天代码", "讲清 CORS 与流式渲染"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/04-llm-backend-api/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "用前端强项收尾前后端打通，给学习者完整闭环成就感",
+    "decision_factors": ["学习者精通 JS", "流式体验关键"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["前端接入", "CORS", "流式渲染"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "30m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

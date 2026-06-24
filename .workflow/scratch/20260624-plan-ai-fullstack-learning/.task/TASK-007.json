@@ -1,0 +1,95 @@
+{
+  "id": "TASK-007",
+  "title": "第06章 提示工程 Prompt Engineering",
+  "description": "编写 chapters/06-prompt-engineering/README.md。讲 system prompt、few-shot 示例、结构化 JSON 输出，提升 LLM 应用可控性。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/06-prompt-engineering/README.md：system prompt 设定角色与约束；few-shot（在 messages 里给示例）；让模型输出结构化 JSON（明确格式 + response_format/json 模式或提示约束 + 解析）；对比『随便问』vs『工程化提示』效果。复用 DeepSeek 调用，六段式骨架。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/06-prompt-engineering/",
+  "focus_paths": ["chapters/06-prompt-engineering/README.md"],
+
+  "read_first": [
+    "chapters/06-prompt-engineering/README.md",
+    "README.md",
+    "chapters/05-frontend-integration/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 3,
+  "parallel_group": "wave3",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/06-prompt-engineering/README.md contains '## 本章目标'",
+      "chapters/06-prompt-engineering/README.md contains '## 下一章预告'",
+      "chapters/06-prompt-engineering/README.md contains 'system'",
+      "chapters/06-prompt-engineering/README.md contains 'few-shot'",
+      "chapters/06-prompt-engineering/README.md contains 'JSON'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|system|few-shot|JSON' chapters/06-prompt-engineering/README.md",
+    "definition_of_done": "学习者能写出带 system prompt 与 few-shot 的提示，并让模型稳定输出可解析的 JSON。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/06-prompt-engineering/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "Prompt 工程教学：system/few-shot/结构化输出"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：用提示工程让模型输出更可控、更可用",
+    "核心概念：system/user/assistant 分工，few-shot 原理，为什么要结构化输出（便于程序消费），temperature 对稳定性影响",
+    "动手实践：对比实验（无 system vs 有 system）；few-shot 分类示例；要求输出 JSON 并用 json.loads 解析（讲解 DeepSeek JSON 输出技巧/response_format）",
+    "常见报错：模型输出多余文字导致 JSON 解析失败、few-shot 示例污染、提示过长超 token",
+    "小结 + 下一章预告：第07章 多轮对话与记忆 + 数据持久化",
+    "JS 对比：把提示工程类比为给函数写清晰的参数约定/契约"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/06-prompt-engineering/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含可运行对比示例", "覆盖 JSON 结构化输出"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/05-frontend-integration/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "结构化输出是后续 RAG/工具调用的基础能力",
+    "decision_factors": ["可控性", "为 RAG 拼接铺垫"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["Prompt 工程"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "30m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

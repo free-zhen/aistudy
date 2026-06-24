@@ -1,0 +1,95 @@
+{
+  "id": "TASK-003",
+  "title": "第02章 第一次调用 LLM API（补充/校对）",
+  "description": "校对并补全 chapters/02-first-llm-call/README.md。本章 README 内容由主流程直接编写，本 task 用于补充缺失要点、统一风格、校验可运行性，不重复创建文件。用 Python 调 DeepSeek，讲 messages/role、token、流式输出。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "校对 chapters/02-first-llm-call/README.md：确认含用 openai SDK（base_url 指向 deepseek）调用 deepseek-chat 的完整示例、messages 数组与 role(system/user/assistant) 含义、token 是什么与计费关系、stream=True 流式逐字输出示例、读取 .env 中密钥。补全六段式骨架。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/02-first-llm-call/",
+  "focus_paths": ["chapters/02-first-llm-call/README.md"],
+
+  "read_first": [
+    "chapters/02-first-llm-call/README.md",
+    "README.md",
+    "chapters/01-python-for-js-devs/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 1,
+  "parallel_group": "wave1",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/02-first-llm-call/README.md contains '## 本章目标'",
+      "chapters/02-first-llm-call/README.md contains '## 下一章预告'",
+      "chapters/02-first-llm-call/README.md contains 'deepseek'",
+      "chapters/02-first-llm-call/README.md contains 'messages'",
+      "chapters/02-first-llm-call/README.md contains 'stream'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|deepseek|messages|stream' chapters/02-first-llm-call/README.md",
+    "definition_of_done": "学习者能写出第一个 Python 脚本成功调用 DeepSeek 并理解 messages/role/token，能跑通流式输出。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/02-first-llm-call/README.md",
+      "action": "modify",
+      "target": "全文",
+      "change": "补全调用示例、messages/role/token 讲解、流式输出、六段式骨架"
+    }
+  ],
+
+  "implementation": [
+    "核对六段式骨架是否齐全",
+    "核心概念：messages 数组结构、role（system/user/assistant）作用、token 概念与计费、temperature；用 JS 调 fetch 的心智对比 SDK 封装",
+    "动手实践：完整脚本 client = OpenAI(api_key, base_url)，client.chat.completions.create(model='deepseek-chat', messages=[...])，打印 choices[0].message.content；再给 stream=True 逐 chunk 输出版本",
+    "常见报错：401、模型名写错、未设 base_url 默认连 OpenAI、流式忘记遍历 chunk",
+    "下一章预告：第03章 后端基础① HTTP 与 FastAPI 入门",
+    "校验所有代码可运行，密钥从 .env 读取"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/02-first-llm-call/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含完整调用与流式示例", "解释 token/role"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/01-python-for-js-devs/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "尽早让学习者获得『调通大模型』的正反馈，建立核心心智",
+    "decision_factors": ["DeepSeek 兼容 OpenAI SDK", "流式是 LLM 应用刚需"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["LLM 调用"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "25m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

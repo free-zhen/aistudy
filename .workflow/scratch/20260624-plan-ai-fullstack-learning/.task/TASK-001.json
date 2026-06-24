@@ -1,0 +1,94 @@
+{
+  "id": "TASK-001",
+  "title": "第00章 环境准备与全局 API Key 配置（补充/校对）",
+  "description": "校对并补全 chapters/00-env-and-apikey/README.md。本章 README 内容由主流程直接编写，本 task 用于补充缺失要点、统一风格、校验可运行性，不重复创建文件。覆盖：DeepSeek 注册、计费说明、统一密钥配置 .env、最小连通性自检脚本。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "校对 chapters/00-env-and-apikey/README.md：确认含 DeepSeek 控制台注册步骤、API Key 获取、计费/额度说明、在项目根创建 .env（DEEPSEEK_API_KEY=sk-xxx，DEEPSEEK_BASE_URL=https://api.deepseek.com）、.gitignore 忽略 .env、一段最小 Python 连通性自检（用 openai SDK 设置 base_url 调 deepseek-chat 打印响应）。补全六段式骨架缺失部分，统一 JS 工程师视角的对比讲解。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/00-env-and-apikey/",
+  "focus_paths": ["chapters/00-env-and-apikey/README.md"],
+
+  "read_first": [
+    "chapters/00-env-and-apikey/README.md",
+    "README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 1,
+  "parallel_group": "wave1",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/00-env-and-apikey/README.md contains '## 本章目标'",
+      "chapters/00-env-and-apikey/README.md contains '## 下一章预告'",
+      "chapters/00-env-and-apikey/README.md contains 'DEEPSEEK_API_KEY'",
+      "chapters/00-env-and-apikey/README.md contains 'https://api.deepseek.com'",
+      "chapters/00-env-and-apikey/README.md contains '.env'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|DEEPSEEK_API_KEY|api.deepseek.com|.env' chapters/00-env-and-apikey/README.md",
+    "definition_of_done": "学习者能据本章独立完成 DeepSeek 注册、密钥配置到 .env，并运行自检脚本看到模型响应。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/00-env-and-apikey/README.md",
+      "action": "modify",
+      "target": "全文",
+      "change": "补全六段式骨架、.env 配置示例、连通性自检脚本，统一风格"
+    }
+  ],
+
+  "implementation": [
+    "读取现有 README（主流程已写），核对六段式骨架是否齐全：本章目标/核心概念/动手实践/常见报错/小结/下一章预告",
+    "核心概念：解释 API Key、base_url、环境变量、为何用 .env 集中管理（对比前端 .env 与 import.meta.env / process.env）",
+    "动手实践：注册 DeepSeek -> 获取 Key -> 项目根建 .env -> pip 装 openai python-dotenv -> 写 check.py 用 OpenAI(base_url=...) 调 deepseek-chat 打印回复",
+    "常见报错：401 鉴权失败、余额不足、base_url 写错、.env 未加载（未 load_dotenv）",
+    "下一章预告：第01章 Python 速成（写给 JS 工程师）",
+    "校验所有代码块可直接复制运行，密钥统一从 .env 读取"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/00-env-and-apikey/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式标题齐全", "含 .env 与 DeepSeek 配置", "自检脚本可运行"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "环境与密钥是全程基础，集中配置一次后续复用，避免每章重复",
+    "decision_factors": ["零后端基础", "DeepSeek 兼容 OpenAI SDK", "密钥安全"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["环境配置"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "20m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

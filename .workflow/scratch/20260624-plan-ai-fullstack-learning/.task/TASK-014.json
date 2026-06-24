@@ -1,0 +1,95 @@
+{
+  "id": "TASK-014",
+  "title": "第13章 部署上线 + 后端基础③",
+  "description": "编写 chapters/13-deployment/README.md。讲生产环境变量管理、Docker 简介、把 RAG 项目部署到云，作为后端基础第三站。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "medium",
+  "action": "创建/编写 chapters/13-deployment/README.md：生产环境变量与密钥管理（区别本地 .env 与平台环境变量）；Docker 简介（镜像/容器类比，写最小 Dockerfile 打包 FastAPI 应用）；部署到云（选一种轻量方案，如容器平台/PaaS）；上线后注意事项（CORS 生产域名、日志、成本）。六段式骨架。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/13-deployment/",
+  "focus_paths": ["chapters/13-deployment/README.md"],
+
+  "read_first": [
+    "chapters/13-deployment/README.md",
+    "README.md",
+    "chapters/12-capstone-frontend/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 4,
+  "parallel_group": "wave4",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/13-deployment/README.md contains '## 本章目标'",
+      "chapters/13-deployment/README.md contains '## 下一章预告'",
+      "chapters/13-deployment/README.md contains 'Docker'",
+      "chapters/13-deployment/README.md contains '环境变量'",
+      "chapters/13-deployment/README.md contains '部署'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|Docker|环境变量|部署' chapters/13-deployment/README.md",
+    "definition_of_done": "学习者理解生产环境变量管理与 Docker 基本概念，能把 RAG 项目打包并部署到云上访问。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/13-deployment/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "环境变量 + Docker 简介 + 云部署教学"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：把毕业项目部署上线，让别人能访问",
+    "核心概念：本地 .env vs 生产环境变量注入；Docker 镜像/容器（类比『打包好的可运行快照』）；为什么要容器化",
+    "动手实践：写最小 Dockerfile（基于 python 镜像、装依赖、启动 uvicorn）；本地 docker build/run 验证；选一个云平台部署（设置环境变量 DEEPSEEK_API_KEY、暴露端口、绑定域名）",
+    "常见报错：密钥提交进镜像、端口未暴露、生产 CORS 漏配真实域名、依赖未写进 requirements、Chroma 持久化目录在容器内丢失（挂载卷）",
+    "小结 + 下一章预告：附录 后端知识地图与排错手册",
+    "JS 对比：Docker 类比前端构建产物 + 运行时一起打包"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/13-deployment/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含 Dockerfile 与部署步骤", "讲清生产环境变量"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/12-capstone-frontend/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "在项目完成后讲部署最自然，后端基础第三站收尾",
+    "decision_factors": ["按需穿插后端基础", "完成上线闭环"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["部署", "Docker", "后端基础"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "35m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

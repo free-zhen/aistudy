@@ -1,0 +1,93 @@
+{
+  "id": "TASK-015",
+  "title": "附录 后端知识地图与排错手册",
+  "description": "编写 appendix/backend-knowledge-map.md。汇总全课穿插的后端知识形成地图，并整理高频报错的速查排错手册，供学习者回顾与查阅。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "medium",
+  "effort": "medium",
+  "action": "创建/编写 appendix/backend-knowledge-map.md：后端知识地图（把 HTTP/FastAPI/SSE/SQLite/向量库/环境变量/Docker/部署 按主题归位，标注对应章节链接，给出 JS↔后端 概念对照速查表）；排错手册（按现象分类的高频报错速查：依赖/venv、API 401/计费、CORS、流式、SQLite、Chroma 维度、Docker/部署），每条给『现象->原因->解决』。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "appendix/",
+  "focus_paths": ["appendix/backend-knowledge-map.md"],
+
+  "read_first": [
+    "appendix/backend-knowledge-map.md",
+    "README.md",
+    "chapters/13-deployment/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 4,
+  "parallel_group": "wave4",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "appendix/backend-knowledge-map.md contains '知识地图'",
+      "appendix/backend-knowledge-map.md contains '排错'",
+      "appendix/backend-knowledge-map.md contains 'CORS'",
+      "appendix/backend-knowledge-map.md contains 'FastAPI'",
+      "appendix/backend-knowledge-map.md contains '现象'"
+    ],
+    "verification": "grep -E '知识地图|排错|CORS|FastAPI|现象' appendix/backend-knowledge-map.md",
+    "definition_of_done": "学习者能用本附录快速定位某个后端概念属于哪章，并按报错现象查到原因与解决方案。"
+  },
+
+  "files": [
+    {
+      "path": "appendix/backend-knowledge-map.md",
+      "action": "create",
+      "target": "全文",
+      "change": "后端知识地图 + 高频报错排错手册"
+    }
+  ],
+
+  "implementation": [
+    "知识地图：按主题（网络/HTTP、Web 框架 FastAPI、流式 SSE、数据存储 SQLite/向量库、配置与环境变量、容器与部署）归类，每项链接对应章节，给 JS↔后端 概念对照速查表",
+    "排错手册：按现象分组的速查条目（环境/venv/pip、DeepSeek 401/余额、CORS 跨域、流式不生效、SQLite 写入/锁、Chroma 维度/持久化、Docker/部署端口与密钥），每条用『现象 -> 原因 -> 解决』三段式",
+    "提供『遇到报错先看哪里』的排查思路（看堆栈/看状态码/二分定位）",
+    "保持与各章风格一致，便于跳转回看"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' appendix/backend-knowledge-map.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["含知识地图与对照表", "排错手册按现象分类且三段式", "链接到对应章节"]
+  },
+
+  "reference": {
+    "pattern": "知识地图 + 现象->原因->解决 排错三段式",
+    "files": ["README.md", "chapters/13-deployment/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "全课后端知识分散穿插，附录统一收口便于查阅",
+    "decision_factors": ["零后端易遗忘", "需速查工具"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["附录", "排错手册"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "30m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

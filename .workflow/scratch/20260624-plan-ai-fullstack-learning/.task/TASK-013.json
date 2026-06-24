@@ -1,0 +1,95 @@
+{
+  "id": "TASK-013",
+  "title": "第12章 毕业项目② RAG 前端",
+  "description": "编写 chapters/12-capstone-frontend/README.md。用 JS 做毕业项目前端：文档上传界面 + 聊天问答界面 + 引用来源展示。",
+  "issue_id": null,
+  "issue_refs": [],
+  "type": "docs",
+  "priority": "high",
+  "effort": "large",
+  "action": "创建/编写 chapters/12-capstone-frontend/README.md：前端页面含文件上传区（调 /upload，显示上传进度/已入库文档列表）+ 聊天区（调 /ask 流式渲染答案）+ 引用展示（把后端返回的来源片段以可点击/折叠形式呈现在答案下方）。发挥学习者前端强项，六段式骨架。",
+  "status": "pending",
+  "completed_at": null,
+  "actual_duration": null,
+
+  "scope": "chapters/12-capstone-frontend/",
+  "focus_paths": ["chapters/12-capstone-frontend/README.md"],
+
+  "read_first": [
+    "chapters/12-capstone-frontend/README.md",
+    "README.md",
+    "chapters/11-capstone-backend/README.md"
+  ],
+
+  "depends_on": [],
+  "wave": 4,
+  "parallel_group": "wave4",
+  "execution_group": null,
+  "executor": "agent",
+
+  "convergence": {
+    "criteria": [
+      "chapters/12-capstone-frontend/README.md contains '## 本章目标'",
+      "chapters/12-capstone-frontend/README.md contains '## 下一章预告'",
+      "chapters/12-capstone-frontend/README.md contains '上传'",
+      "chapters/12-capstone-frontend/README.md contains '引用'",
+      "chapters/12-capstone-frontend/README.md contains 'fetch'"
+    ],
+    "verification": "grep -E '## 本章目标|## 下一章预告|上传|引用|fetch' chapters/12-capstone-frontend/README.md",
+    "definition_of_done": "学习者能做出完整前端：上传文档、提问看到流式答案，并能看到答案引用的来源片段。"
+  },
+
+  "files": [
+    {
+      "path": "chapters/12-capstone-frontend/README.md",
+      "action": "create",
+      "target": "全文",
+      "change": "RAG 前端：上传界面 + 聊天界面 + 引用展示"
+    }
+  ],
+
+  "implementation": [
+    "本章目标：给 RAG 后端配一个好用的前端，完成毕业项目闭环",
+    "核心概念：FormData 上传文件、上传进度、已入库文档列表呈现；流式答案渲染；引用来源 UI（折叠/高亮）",
+    "动手实践：上传区用 fetch + FormData 调 /upload 并展示结果；聊天区调 /ask 流式渲染（复用第05章流式读取）；解析后端返回的来源 metadata 渲染为引用卡片",
+    "常见报错：FormData 不要手动设 Content-Type、大文件上传反馈缺失、流式与引用数据如何分离传输、跨域沿用第05章 CORS",
+    "小结 + 下一章预告：第13章 部署上线 + 后端基础③",
+    "充分发挥前端强项，原生 JS 为主，UI 简洁可用"
+  ],
+
+  "test": {
+    "commands": ["grep -c '##' chapters/12-capstone-frontend/README.md"],
+    "unit": [],
+    "integration": [],
+    "success_metrics": ["六段式齐全", "含上传/聊天/引用完整前端代码", "与第11章后端契合"]
+  },
+
+  "reference": {
+    "pattern": "六段式章节骨架 + JS 对比讲解",
+    "files": ["README.md", "chapters/11-capstone-backend/README.md", "chapters/05-frontend-integration/README.md"],
+    "examples": null
+  },
+
+  "rationale": {
+    "chosen_approach": "前端是学习者强项，作为毕业项目收尾给足成就感",
+    "decision_factors": ["前端强项", "完整产品闭环"],
+    "tradeoffs": null
+  },
+
+  "risks": [],
+  "code_skeleton": null,
+
+  "doc_context": {
+    "affected_features": ["RAG 前端", "毕业项目"],
+    "affected_components": [],
+    "affected_requirements": [],
+    "adr_ids": []
+  },
+
+  "meta": {
+    "estimated_time": "40m",
+    "risk": "low",
+    "autonomous": true,
+    "checkpoint": false
+  }
+}

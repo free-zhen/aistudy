@@ -30,3 +30,5 @@
 
 - 附录
   - [后端知识地图与排错手册](/appendix/backend-knowledge-map.md)
+  - [运维概念扫盲（部署用到的东西）](/appendix/ops-concepts.md)
+  - [部署实战手册](/DEPLOY.md)

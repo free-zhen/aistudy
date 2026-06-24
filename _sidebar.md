@@ -29,6 +29,7 @@
   - [21 框架速览](/chapters/21-frameworks-langchain-llamaindex/README.md)
 
 - 附录
+  - [AI 大模型面试题精选（含答案）](/appendix/ai-interview-questions.md)
   - [后端知识地图与排错手册](/appendix/backend-knowledge-map.md)
   - [运维概念扫盲（部署用到的东西）](/appendix/ops-concepts.md)
   - [部署实战手册](/DEPLOY.md)

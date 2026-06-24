@@ -10,16 +10,29 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: SSH 到服务器并更新代码
+      # ① 在 GitHub 的机器上把仓库代码检出（GitHub 访问自己当然没问题）
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      # ② 用 rsync 把文件推送到你的服务器（服务器无需访问 GitHub）
+      - name: rsync 部署到服务器
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete --exclude='.git' --exclude='.github' --exclude='.workflow'
+          path: ./
+          remote_path: /var/www/ai-course/
+          remote_host: ${{ secrets.SERVER_HOST }}
+          remote_user: ${{ secrets.SERVER_USER }}
+          remote_key: ${{ secrets.SERVER_SSH_KEY }}
+
+      # ③ 推送完成后，修复 SELinux 文件标签并重载 Nginx
+      - name: 修复权限并重载 Nginx
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.SERVER_HOST }} # 服务器公网 IP 或域名
-          username: ${{ secrets.SERVER_USER }} # 登录用户名，如 root
-          key: ${{ secrets.SERVER_SSH_KEY }} # 部署私钥（见配置说明）
-          port: ${{ secrets.SERVER_PORT || 22 }} # SSH 端口，默认 22
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            set -e
-            cd /var/www/ai-course        # 服务器上仓库所在目录（按实际改）
-            git fetch --all
-            git reset --hard origin/main # 强制与远端一致，避免冲突
-            echo "✅ 部署完成：$(git rev-parse --short HEAD)"
+            chcon -R -t httpd_sys_content_t /var/www/ai-course 2>/dev/null || true
+            systemctl reload nginx 2>/dev/null || true
+            echo "✅ 部署完成"

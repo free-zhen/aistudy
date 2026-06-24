@@ -25,6 +25,10 @@
       subMaxLevel: 2,           // 正文标题自动生成右侧锚点（到 2 级）
       auto2top: true,           // 切换章节自动回到顶部
       relativePath: true,       // 关键：让章节间的 ../xx/README.md 相对链接正常跳转
+      // 让侧边栏在任何子目录页面都从根目录加载（修复进入章节后目录消失/卡加载）
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
       search: {
         placeholder: '搜索章节内容…',
         noData: '没有找到结果',
